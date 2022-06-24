@@ -1,15 +1,13 @@
 <template>
   <svg aria-hidden="true">
-    <title>{{svg.title}}</title>
-    <use v-bind:xlink:href="svg.xlink"></use>
+    <title>{{title}}</title>
+    <use v-bind:xlink:href="xlink"></use>
   </svg>
 </template>
 
-<script>
-export default {
-  name: "ISVG",
-  props: {svg: Object}
-}
+<script setup>
+const props = defineProps({svg: Object})
+const {title, xlink} = props.svg
 </script>
 
 <style scoped>

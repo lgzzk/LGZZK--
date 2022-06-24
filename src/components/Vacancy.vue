@@ -1,15 +1,10 @@
 <template>
-  <div
-      id="vacancy"
-  >
+  <div id="vacancy">
     <span class="text-style">¯\_(ツ)_/¯</span>
   </div>
 </template>
 
-<script>
-export default {
-  name: "Vacancy",
-}
+<script setup>
 </script>
 
 <style scoped>

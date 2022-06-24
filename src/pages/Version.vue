@@ -4,12 +4,9 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import 'animate.css'
 
-export default {
-  name: "Version",
-}
 </script>
 
 <style scoped>
@@ -29,7 +26,8 @@ iframe {
     width: 100%;
     height: 100%;
   }
-  iframe{
+
+  iframe {
     transform: scale(.7, .7);
   }
 }

@@ -1,17 +1,16 @@
  <template>
-  <a :href="friend.href" target="_blank">
+  <a :href="href" target="_blank">
     <div id="friendInfo">
-      <img :src="friend.img">
-      <span>{{friend.title}}</span>
+      <img :src="img" :alt=title>
+      <span>{{title}}</span>
     </div>
   </a>
 </template>
 
-<script>
-export default {
-  name: "FriendInfo",
-  props: {friend: Object}
-}
+<script setup>
+
+const props = defineProps({friend: Object})
+const {href, img, title} = props.friend
 </script>
 
 <style scoped>

@@ -2,13 +2,9 @@
   <Vacancy/>
 </template>
 
-<script>
+<script setup>
 import Vacancy from "../components/Vacancy.vue";
 
-export default {
-  name: "about",
-  components: {Vacancy},
-}
 </script>
 
 <style scoped>

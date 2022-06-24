@@ -1,32 +1,32 @@
 <template>
-  <div>
-    <div id="focusInfo">
-      <a href="https://www.lgzzk.site">
-        <img
-            src="https://vkceyugu.cdn.bspapp.com/VKCEYUGU-ad68b41e-972e-434c-96f7-4c36352c738b/fd80e8ad-d2ed-494c-9db0-63986f23a2ef.png"
-            class="headImg" title="LGZZK"
-        />
-      </a>
-      <Typer/>
-      <div class="social">
-        <SvgItem
-            v-for="s in svgs"
-            :key="s.xlink"
-            :svg="s"
-        />
-      </div>
+  <div id="focusInfo">
+    <a href="https://www.lgzzk.site">
+      <img
+          src="https://vkceyugu.cdn.bspapp.com/VKCEYUGU-ad68b41e-972e-434c-96f7-4c36352c738b/fd80e8ad-d2ed-494c-9db0-63986f23a2ef.png"
+          class="headImg" title="LGZZK"
+      />
+    </a>
+    <Typewrite/>
+    <div class="social">
+      <SvgItem
+          v-for="s in svgs"
+          :key="s.xlink"
+          :svg="s"
+      />
     </div>
   </div>
 </template>
 
 <script>
-import Typer from "../components/Typer.vue";
+import Typewrite from "../components/Typewrite.vue";
 import SvgItem from "../components/SvgItem.vue";
 import axios from "axios";
 
 export default {
   name: "FocusInfo",
-  components: {SvgItem, Typer},
+  components: {SvgItem, Typewrite},
+  mounted() {
+  },
   data() {
     return {
       svgs: [

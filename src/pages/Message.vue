@@ -1,15 +1,10 @@
 <template>
-<div>
   <Vacancy/>
-</div>
 </template>
 
-<script>
+<script setup>
 import Vacancy from "../components/Vacancy.vue";
-export default {
-  name: "Message",
-  components: {Vacancy},
-}
+
 </script>
 
 <style scoped>

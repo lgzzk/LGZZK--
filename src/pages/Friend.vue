@@ -1,27 +1,19 @@
 <template>
   <div id="friend">
     <FriendInfo
-        v-for="(f, i) in friends"
+        v-for="(f, i) in Friends"
         :friend="f"
         :key="'friends'+i"
     />
   </div>
 </template>
 
-<script>
+<script setup>
 
 import FriendInfo from "../components/FriendInfo.vue";
-import {Friends} from '../assets/lgzzk_config.json'
+import {Friends} from '../assets/lgzzk_config.json';
 
-export default {
-  name: "Friend",
-  components: {FriendInfo},
-  data() {
-    return {
-      friends: Friends
-    }
-  }
-}
+
 </script>
 
 <style scoped>

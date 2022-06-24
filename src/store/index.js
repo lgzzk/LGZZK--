@@ -3,12 +3,12 @@ import {createStore} from "vuex";
 export let store = createStore({
     state() {
         return {
-            isOpenNavigtion: false,
+            isOpenNavigation: false,
             errorPath: ''
         }
     },
     mutations: {
-        setNavigtion(state) {
+        setNavigation(state) {
             state.isOpenNavigtion = !state.isOpenNavigtion
         }
     }

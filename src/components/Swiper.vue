@@ -2,7 +2,6 @@
   <div
       id="swiper"
       :style="{marginLeft}"
-      @keyup.left="this.$bus.$emit('sliderImg', false)"
   >
     <SwiperItem
         v-for="item in bannerImg"
@@ -18,6 +17,7 @@ import {nanoid} from 'nanoid'
 import SwiperItem from "./SwiperItem.vue"
 import {BannerImgMobile} from "../assets/lgzzk_config.json";
 import {BannerImgPC} from "../assets/lgzzk_config.json";
+import {reactive} from "vue";
 
 export default {
   name: "Swiper",
@@ -25,7 +25,7 @@ export default {
   data() {
     return {
       bannerImg: [],
-      BannerImg: [],
+      BannerImg: reactive([]),
       margin: 0,
       screenWidth: '',
       timer: null
@@ -47,16 +47,15 @@ export default {
   mounted() {
     this.startSliderImg()
     this.selectBannerImg(document.body.clientWidth)
-    this.$bus.$on('sliderImg', this.sliderImg)
-    this.$bus.$on('startSliderImg', this.startSliderImg)
-    this.$bus.$on('stopSliderImg', () => clearInterval(this.timer))
+    this.$emit('sliderImg', this.sliderImg)
+    this.$emit('startSliderImg', this.startSliderImg)
+    this.$emit('stopSliderImg', () => clearInterval(this.timer))
     window.onresize = ev => this.screenWidth = ev.currentTarget.innerWidth
   },
   methods: {
     initSwiper() {
-      this.bannerImg = []
       this.BannerImg.forEach((value, i) => {
-        this.$set(this.bannerImg, i, {
+        this.bannerImg.push({
           id: nanoid(),
           url: this.BannerImg[this.nonce].url,
           info: this.BannerImg[i].info
@@ -95,7 +94,7 @@ export default {
   width: 100vw;
   height: 100vh;
   display: flex;
-  margin-left: 0%;
+  margin-left: 0;
   position: relative;
   transition: ease margin-left .9s;
 }
