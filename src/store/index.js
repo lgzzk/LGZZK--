@@ -9,7 +9,6 @@ export let store = createStore({
     },
     mutations: {
         setNavigation(state) {
-            console.log("?????")
             state.isOpenNavigation = !state.isOpenNavigation
         }
     }

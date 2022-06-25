@@ -1,9 +1,9 @@
 <template>
   <div
       class="navigation"
-      :class="isOpenConten"
+      :class="isOpenContent"
   >
-    <div class="btn" :class="isOpenBtn" @click="setNavigtion">
+    <div class="btn" :class="isOpenBtn" @click="setNavigation">
       <ISVG
           class="icon"
           :svg="{xlink: '#icon-times', title: '展开'}"
@@ -19,64 +19,53 @@
   </div>
 </template>
 
-<script>
+<script setup>
 
 import NavigationItem from "./NavigationItem.vue";
-import {mapMutations, mapState} from "vuex";
 import ISVG from "./ISVG.vue";
+import {useStore} from "vuex";
+import {computed} from "vue";
 
-export default {
-  name: "Navigation",
-  components: {ISVG, NavigationItem},
-  computed: {
-    isOpenBtn() {
-      return this.isOpenNavigtion ? 'open-btn' : 'close-btn'
-    },
-    isOpenConten() {
-      return this.isOpenNavigtion ? 'open-navigation' : 'close-navigation'
-    },
-    ...mapState(['isOpenNavigtion'])
+const {state, commit} = useStore()
+const navItems = [
+  {
+    xlink: '#icon-xiazai44',
+    href: '/',
+    text: 'home'
   },
-  methods: {
-    ...mapMutations(['setNavigtion'])
+  {
+    xlink: '#icon-folder',
+    href: '/project',
+    text: 'project'
   },
-  data() {
-    return {
-      navItems: [
-        {
-          xlink: '#icon-xiazai44',
-          href: '/',
-          text: 'home'
-        },
-        {
-          xlink: '#icon-folder',
-          href: '/project',
-          text: 'project'
-        },
-        {
-          xlink: '#icon-xiaoxi',
-          href: '/message',
-          text: 'message'
-        },
-        {
-          xlink: '#icon-user-friends',
-          href: '/friend',
-          text: 'friend'
-        },
-        {
-          xlink: '#icon-shijian',
-          href: '/version',
-          text: 'version'
-        },
-        {
-          xlink: '#icon-guanyu1',
-          href: '/about',
-          text: 'about'
-        },
-      ],
-    }
-  }
+  {
+    xlink: '#icon-xiaoxi',
+    href: '/message',
+    text: 'message'
+  },
+  {
+    xlink: '#icon-user-friends',
+    href: '/friend',
+    text: 'friend'
+  },
+  {
+    xlink: '#icon-shijian',
+    href: '/version',
+    text: 'version'
+  },
+  {
+    xlink: '#icon-guanyu1',
+    href: '/about',
+    text: 'about'
+  },
+]
+
+const isOpenBtn = computed(() => state.isOpenNavigation ? 'open-btn' : 'close-btn')
+const isOpenContent = computed(() => state.isOpenNavigation ? 'open-navigation' : 'close-navigation')
+const setNavigation = () => {
+  commit("setNavigation")
 }
+
 </script>
 
 <style scoped>

@@ -12,6 +12,6 @@ import Page from "./components/Page.vue";
 
 <style>
 #app {
-  overflow-x: hidden;
+  overflow: hidden;
 }
 </style>

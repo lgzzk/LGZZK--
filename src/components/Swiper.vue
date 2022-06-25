@@ -11,82 +11,73 @@
   </div>
 </template>
 
-<script>
+<script setup>
 
 import {nanoid} from 'nanoid'
 import SwiperItem from "./SwiperItem.vue"
 import {BannerImgMobile} from "../assets/lgzzk_config.json";
 import {BannerImgPC} from "../assets/lgzzk_config.json";
-import {reactive} from "vue";
+import {computed, onMounted, reactive, ref, watch} from "vue";
 
-export default {
-  name: "Swiper",
-  components: {SwiperItem},
-  data() {
-    return {
-      bannerImg: [],
-      BannerImg: reactive([]),
-      margin: 0,
-      screenWidth: '',
-      timer: null
-    }
-  },
-  watch: {
-    screenWidth(width) {
-      this.selectBannerImg(width)
-    }
-  },
-  computed: {
-    nonce() {
-      return Math.floor(Math.random() * this.BannerImg.length)
-    },
-    marginLeft() {
-      return this.margin * -100 + '%'
-    }
-  },
-  mounted() {
-    this.startSliderImg()
-    this.selectBannerImg(document.body.clientWidth)
-    this.$emit('sliderImg', this.sliderImg)
-    this.$emit('startSliderImg', this.startSliderImg)
-    this.$emit('stopSliderImg', () => clearInterval(this.timer))
-    window.onresize = ev => this.screenWidth = ev.currentTarget.innerWidth
-  },
-  methods: {
-    initSwiper() {
-      this.BannerImg.forEach((value, i) => {
-        this.bannerImg.push({
-          id: nanoid(),
-          url: this.BannerImg[this.nonce].url,
-          info: this.BannerImg[i].info
-        })
-      })
-      setTimeout(() => this.margin = this.nonce, 0)
-    },
-    sliderImg(flag) {
-      if (flag === true) {
-        if (--this.margin < 0) this.margin = this.BannerImg.length - 1;
-      } else {
-        this.margin = ++this.margin % this.BannerImg.length
-      }
-      this.bannerImg[this.margin].url = this.BannerImg[this.margin].url
-      if (this.margin + 1 !== this.bannerImg.length) {
-        this.bannerImg[this.margin + 1].url = this.BannerImg[this.margin + 1].url
-      }
-    },
-    startSliderImg() {
-      this.timer = setInterval(() => this.sliderImg(false), 12 * 1000)
-    },
-    selectBannerImg(width) {
-      if (width < 768) {
-        this.BannerImg = BannerImgMobile
-      } else {
-        this.BannerImg = BannerImgPC
-      }
-      this.initSwiper()
-    }
+let bannerImg = reactive([]),
+    BannerImg = reactive([]),
+    margin = ref(0),
+    screenWidth = ref(0),
+    timer = null
+
+const nonce = computed(() => Math.floor(Math.random() * BannerImg.length))
+const marginLeft = computed(() => margin.value * -100 + '%')
+
+onMounted(() => {
+  startSliderImg()
+  selectBannerImg(document.body.clientWidth)
+  window.onresize = ev => screenWidth.value = ev.currentTarget.innerWidth
+})
+
+watch(screenWidth, value => {
+  selectBannerImg(value)
+})
+
+
+function startSliderImg() {
+  timer = setInterval(() => sliderImg(false), 12 * 1000)
+}
+
+function initSwiper() {
+  // bannerImg = reactive([])
+  BannerImg.forEach((value, i) => {
+    bannerImg.push({
+      id: nanoid(),
+      url: BannerImg[nonce.value].url,
+      info: BannerImg[i].info
+    })
+  })
+  setTimeout(() => margin.value = nonce.value, 0)
+}
+
+
+function sliderImg(flag) {
+  if (flag === true) {
+    if (--margin.value < 0) margin.value = BannerImg.length - 1;
+  } else {
+    margin.value = ++margin.value % BannerImg.length
+  }
+  bannerImg[margin.value].url = BannerImg[margin.value].url
+  if (margin.value + 1 !== bannerImg.length) {
+    bannerImg[margin.value + 1].url = BannerImg[margin.value + 1].url
   }
 }
+
+
+function selectBannerImg(width) {
+  if (width < 768) {
+    BannerImg = BannerImgMobile
+  } else {
+    BannerImg = BannerImgPC
+  }
+  initSwiper()
+}
+
 </script>
 
 <style scoped>
