@@ -1,24 +1,16 @@
 <template>
   <div class="slide" :style="{backgroundImage}">
     <span class='infobox'>
-      {{img.info}}
+      {{ img.info }}
     </span>
   </div>
 </template>
 
-<script>
-export default {
-  name: "SwiperItem",
-  props: {
-    img: Object
-  },
-  computed: {
-    backgroundImage(){
-      return `url('${this.img.url}')`
-    }
-  }
+<script setup>
+import {computed} from "vue";
 
-}
+const props = defineProps({img: Object});
+const backgroundImage = computed(()=>`url('${props.img.url}')`)
 </script>
 
 <style scoped>
@@ -32,13 +24,13 @@ export default {
   background-position: center center;
 }
 
-.infobox{
+.infobox {
   right: 10px;
   bottom: 3%;
   font-size: 25px;
   user-select: none;
   position: absolute;
-  color: rgba(255,255,255,1);
+  color: rgba(255, 255, 255, 1);
 }
 
 @media screen and (max-width: 768px) {

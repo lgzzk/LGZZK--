@@ -1,42 +1,36 @@
 <template>
   <li @click="close">
     <RouterLink
-        :to="navItem.href"
+        :to="href"
         exact-active-class="active"
     >
       <ISVG
           class="icon"
           :svg="navItem"
       />
-      <span>{{ navItem.text }}</span>
+      <span>{{ text }}</span>
     </RouterLink>
   </li>
 </template>
 
-<script>
-import {mapMutations} from "vuex";
+<script setup>
 import ISVG from "./ISVG.vue";
+import {useStore} from "vuex";
 
-export default {
-  name: "NavigationItem",
-  components: {ISVG},
-  props: {
-    navItem: Object
-  },
-  methods: {
-    close() {
-      if (document.body.clientWidth < 768) {
-        this.setNavigtion()
-      }
-    },
-    ...mapMutations(['setNavigtion'])
+const props = defineProps({navItem: Object});
+const {text, href} = props.navItem
+const {commit} = useStore()
+
+const close = () => {
+  if (document.body.clientWidth < 768) {
+    commit("setNavigation")
   }
 }
 </script>
 
 <style scoped>
 li {
-  margin: 1% 0px;
+  margin: 1% 0;
 }
 
 a {

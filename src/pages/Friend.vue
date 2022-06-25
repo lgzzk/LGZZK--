@@ -5,13 +5,14 @@
         :friend="f"
         :key="'friends'+i"
     />
+    <FriendInfo/>
   </div>
 </template>
 
 <script setup>
 
-import FriendInfo from "../components/FriendInfo.vue";
 import {Friends} from '../assets/lgzzk_config.json';
+import FriendInfo from "../components/FriendInfo.vue";
 
 
 </script>

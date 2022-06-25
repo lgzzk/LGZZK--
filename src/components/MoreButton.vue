@@ -1,6 +1,5 @@
 <template>
-  <div @click="setNavigtion">
-    <ISVG/>
+  <div @click="setNavigation">
     <ISVG
         class="btn icon"
         :svg="{xlink: '#icon-gengduo6', title: '展开'}"
@@ -10,26 +9,18 @@
 </template>
 <script setup>
 import {computed} from "vue";
-import ISVG from "./ISVG.vue";
-// import {store} from "./src/store/index.js";
+import ISVG from "../components/ISVG.vue";
+import {useStore} from "vuex";
 
-// const isOpen = computed(() => {
-//   return this.isOpenNavigtion ? 'open-btn' : 'close-btn'
-// })
-// const isOpenNavigation = computed(()=>store.state.isOpenNavigation)
-// ...mapMutations(['setNavigtion'])
+const {state, commit} = useStore()
 
-// export default {
-//   computed: {
-//     isOpen() {
-//       return this.isOpenNavigtion ? 'open-btn' : 'close-btn'
-//     },
-//     ...mapState(['isOpenNavigtion'])
-//   },
-//   methods: {
-//     ...mapMutations(['setNavigtion'])
-//   }
-// }
+const isOpen = computed(() => {
+  return state.isOpenNavigation ? 'open-btn' : 'close-btn'
+})
+const setNavigation = ()=> {
+  commit("setNavigation")
+}
+
 </script>
 
 <style scoped>

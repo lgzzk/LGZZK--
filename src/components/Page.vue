@@ -3,7 +3,7 @@
       id="page"
       :class="isOpenContent"
   >
-    <MoreButton />
+    <MoreButton/>
     <Swiper/>
     <div class="content">
       <transition
@@ -18,21 +18,14 @@
   </div>
 </template>
 
-<script>
-import {mapState} from "vuex";
+<script setup>
 import Swiper from "./Swiper.vue";
 import MoreButton from "./MoreButton.vue";
+import {useStore} from "vuex";
+import {computed} from "vue";
 
-export default {
-  name: "Page",
-  components: {MoreButton ,Swiper},
-  computed: {
-    isOpenContent() {
-      return this.isOpenNavigtion ? 'open-content' : 'close-content'
-    },
-    ...mapState(['isOpenNavigtion'])
-  }
-}
+const {state} = useStore()
+const isOpenContent = computed(() => state.isOpenNavigation ? 'open-content' : 'close-content')
 </script>
 
 <style scoped>
@@ -72,7 +65,7 @@ export default {
 }
 
 @media screen and (max-width: 768px) {
-  #page{
+  #page {
     transition: ease left .37s;
   }
 }

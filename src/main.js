@@ -6,8 +6,7 @@ import './assets/css/global.css'
 import {router} from "./router/index.js";
 
 
-
-const app = createApp(App)
-app.use(store)
-app.use(router)
-app.mount('#app')
+createApp(App)
+    .use(store)
+    .use(router)
+    .mount('#app')

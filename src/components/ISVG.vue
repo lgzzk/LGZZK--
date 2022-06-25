@@ -7,7 +7,7 @@
 
 <script setup>
 const props = defineProps({svg: Object})
-const {title, xlink} = props.svg
+const {xlink, title} = props.svg
 </script>
 
 <style scoped>

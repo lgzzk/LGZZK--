@@ -4,13 +4,12 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: "NotFound",
-  mounted() {
-    history.replaceState(null, null, this.$route.params.path)
-  }
-}
+<script setup>
+import {onMounted} from "vue";
+
+onMounted(() => {
+  history.replaceState(null, null, this.$route.params.path)
+})
 </script>
 
 <style scoped>

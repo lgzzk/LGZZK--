@@ -5,25 +5,20 @@
       @click="callBack"
   >
     <ISVG
-      class="icon"
-      :svg="svg"
+        class="icon"
+        :svg="svg"
     />
   </a>
 </template>
 
-<script>
+<script setup>
 import ISVG from "./ISVG.vue";
-export default {
-  name: "SvgItem",
-  components: {ISVG},
-  props: {svg: Object},
-  methods: {
-    callBack(){
-      if (this.svg.callBack){
-        this.svg.callBack()
-      }
-    }
-  },
+
+const props = defineProps({svg: Object});
+const callBack = () => {
+  if (props.svg.callBack) {
+    props.svg.callBack()
+  }
 }
 </script>
 
@@ -38,11 +33,11 @@ export default {
   fill: rgb(255, 255, 255);
 }
 
-a{
+a {
   transition: .25s;
 }
 
-a:hover{
+a:hover {
   transform: rotate(360deg);
 }
 
