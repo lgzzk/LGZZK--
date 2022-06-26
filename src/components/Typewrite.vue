@@ -29,7 +29,6 @@ function typewriting(time) {
     } else {
       ++textIndex
       let s = [...TyperText[headIndex]].slice(0, textIndex).toString()
-      console.log(headText.value.innerText)
       headText.value.innerText = s.replace(/,/g, "")
     }
     if (textIndex === TyperText[headIndex].length) {

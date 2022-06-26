@@ -18,14 +18,16 @@ import SwiperItem from "./SwiperItem.vue"
 import {BannerImgMobile} from "../assets/lgzzk_config.json";
 import {BannerImgPC} from "../assets/lgzzk_config.json";
 import {computed, onMounted, reactive, ref, watch} from "vue";
+import {random} from "../utils/tool.js";
 
 let bannerImg = reactive([]),
-    BannerImg = reactive([]),
+    BannerImg = [],
     margin = ref(0),
     screenWidth = ref(0),
-    timer = null
+    flag = ref(null),
+    timer = null,
+    nonce = null
 
-const nonce = computed(() => Math.floor(Math.random() * BannerImg.length))
 const marginLeft = computed(() => margin.value * -100 + '%')
 
 onMounted(() => {
@@ -38,21 +40,25 @@ watch(screenWidth, value => {
   selectBannerImg(value)
 })
 
+watch(flag, value => {
+  initSwiper()
+})
+
 
 function startSliderImg() {
   timer = setInterval(() => sliderImg(false), 12 * 1000)
 }
 
 function initSwiper() {
-  // bannerImg = reactive([])
+  bannerImg.length = 0
   BannerImg.forEach((value, i) => {
     bannerImg.push({
       id: nanoid(),
-      url: BannerImg[nonce.value].url,
+      url: BannerImg[nonce].url,
       info: BannerImg[i].info
     })
   })
-  setTimeout(() => margin.value = nonce.value, 0)
+  setTimeout(() => margin.value = nonce, 0)
 }
 
 
@@ -71,11 +77,13 @@ function sliderImg(flag) {
 
 function selectBannerImg(width) {
   if (width < 768) {
+    flag.value = true
     BannerImg = BannerImgMobile
   } else {
+    flag.value = false
     BannerImg = BannerImgPC
   }
-  initSwiper()
+  nonce = random(0, BannerImg.length-1)
 }
 
 </script>
