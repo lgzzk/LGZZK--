@@ -19,6 +19,7 @@ import {BannerImgMobile} from "../assets/lgzzk_config.json";
 import {BannerImgPC} from "../assets/lgzzk_config.json";
 import {computed, onMounted, reactive, ref, watch} from "vue";
 import {random} from "../utils/tool.js";
+import {useStore} from "vuex";
 
 let bannerImg = reactive([]),
     BannerImg = [],
@@ -29,10 +30,16 @@ let bannerImg = reactive([]),
     nonce = null
 
 const marginLeft = computed(() => margin.value * -100 + '%')
+const {commit} = useStore()
 
 onMounted(() => {
   startSliderImg()
   selectBannerImg(document.body.clientWidth)
+  commit("setSwiper", {
+    sliderImg,
+    startSliderImg,
+    stopSliderImg
+  })
   window.onresize = ev => screenWidth.value = ev.currentTarget.innerWidth
 })
 
@@ -40,13 +47,17 @@ watch(screenWidth, value => {
   selectBannerImg(value)
 })
 
-watch(flag, value => {
+watch(flag, () => {
   initSwiper()
 })
 
 
 function startSliderImg() {
   timer = setInterval(() => sliderImg(false), 12 * 1000)
+}
+
+function stopSliderImg() {
+  clearInterval(timer)
 }
 
 function initSwiper() {
@@ -83,7 +94,7 @@ function selectBannerImg(width) {
     flag.value = false
     BannerImg = BannerImgPC
   }
-  nonce = random(0, BannerImg.length-1)
+  nonce = random(0, BannerImg.length - 1)
 }
 
 </script>

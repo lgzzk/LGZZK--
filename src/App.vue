@@ -1,6 +1,12 @@
 <script setup>
 import Navigation from "./components/Navigation.vue";
 import Page from "./components/Page.vue";
+import {onMounted} from "vue";
+import axios from "axios";
+
+onMounted(() => axios.get("https://web.lgzzk.site/SpringBoot/employees/3").then(({data}) => {
+  console.log(data)
+}))
 </script>
 
 <template>
@@ -12,6 +18,6 @@ import Page from "./components/Page.vue";
 
 <style>
 #app {
-  overflow: hidden;
+  overflow-x: hidden;
 }
 </style>

@@ -4,12 +4,16 @@ export let store = createStore({
     state() {
         return {
             isOpenNavigation: false,
-            errorPath: ''
+            errorPath: '',
+            swiper: {}
         }
     },
     mutations: {
         setNavigation(state) {
             state.isOpenNavigation = !state.isOpenNavigation
+        },
+        setSwiper(state, swiper){
+            state.swiper = swiper
         }
     }
 })
