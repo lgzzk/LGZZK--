@@ -3,7 +3,7 @@
       class="navigation"
       :class="isOpenContent"
   >
-    <div class="btn" :class="isOpenBtn" @click="setNavigation">
+    <div class="btn" :class="isOpenBtn" @click="store.setNavigation">
       <ISVG
           class="icon"
           :svg="{xlink: '#icon-times', title: '展开'}"
@@ -23,10 +23,11 @@
 
 import NavigationItem from "./NavigationItem.vue";
 import ISVG from "./ISVG.vue";
-import {useStore} from "vuex";
 import {computed} from "vue";
+import {mainStore} from '../store/index.js'
+import {storeToRefs} from "pinia";
+const store = mainStore();
 
-const {state, commit} = useStore()
 const navItems = [
   {
     xlink: '#icon-xiazai44',
@@ -60,11 +61,8 @@ const navItems = [
   },
 ]
 
-const isOpenBtn = computed(() => state.isOpenNavigation ? 'open-btn' : 'close-btn')
-const isOpenContent = computed(() => state.isOpenNavigation ? 'open-navigation' : 'close-navigation')
-const setNavigation = () => {
-  commit("setNavigation")
-}
+const isOpenBtn = computed(() => store.isOpenNavigation ? 'open-btn' : 'close-btn')
+const isOpenContent = computed(() => store.isOpenNavigation ? 'open-navigation' : 'close-navigation')
 
 </script>
 

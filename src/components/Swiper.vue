@@ -18,8 +18,8 @@ import SwiperItem from "./SwiperItem.vue"
 import {BannerImgMobile} from "../assets/lgzzk_config.json";
 import {BannerImgPC} from "../assets/lgzzk_config.json";
 import {computed, onMounted, reactive, ref, watch} from "vue";
-import {random} from "../utils/tool.js";
-import {useStore} from "vuex";
+import {mainStore} from "../store/index.js";
+import {random} from "../hook/index.js";
 
 let bannerImg = reactive([]),
     BannerImg = [],
@@ -30,16 +30,16 @@ let bannerImg = reactive([]),
     nonce = null
 
 const marginLeft = computed(() => margin.value * -100 + '%')
-const {commit} = useStore()
+const store = mainStore()
 
 onMounted(() => {
   startSliderImg()
   selectBannerImg(document.body.clientWidth)
-  commit("setSwiper", {
+  store.swiper = {
     sliderImg,
     startSliderImg,
     stopSliderImg
-  })
+  }
   window.onresize = ev => screenWidth.value = ev.currentTarget.innerWidth
 })
 

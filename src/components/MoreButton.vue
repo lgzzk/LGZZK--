@@ -1,5 +1,5 @@
 <template>
-  <div @click="setNavigation">
+  <div @click="store.setNavigation">
     <ISVG
         class="btn icon"
         :svg="{xlink: '#icon-gengduo6', title: '展开'}"
@@ -10,16 +10,12 @@
 <script setup>
 import {computed} from "vue";
 import ISVG from "../components/ISVG.vue";
-import {useStore} from "vuex";
+import {mainStore} from "../store/index.js";
+import {storeToRefs} from "pinia";
 
-const {state, commit} = useStore()
+const store = mainStore();
 
-const isOpen = computed(() => {
-  return state.isOpenNavigation ? 'open-btn' : 'close-btn'
-})
-const setNavigation = ()=> {
-  commit("setNavigation")
-}
+const isOpen = computed(() => store.isOpenNavigation ? 'open-btn' : 'close-btn')
 
 </script>
 

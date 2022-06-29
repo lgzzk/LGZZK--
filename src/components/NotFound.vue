@@ -6,9 +6,12 @@
 
 <script setup>
 import {onMounted} from "vue";
+import {useRoute} from "vue-router";
+
+const route = useRoute();
 
 onMounted(() => {
-  history.replaceState(null, null, this.$route.params.path)
+  history.replaceState(null, null, route.params.path)
 })
 </script>
 

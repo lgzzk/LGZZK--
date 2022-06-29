@@ -15,15 +15,15 @@
 
 <script setup>
 import ISVG from "./ISVG.vue";
-import {useStore} from "vuex";
+import {mainStore} from "../store/index.js";
 
 const props = defineProps({navItem: Object});
 const {text, href} = props.navItem
-const {commit} = useStore()
+const store = mainStore();
 
 const close = () => {
   if (document.body.clientWidth < 768) {
-    commit("setNavigation")
+    store.setNavigation()
   }
 }
 </script>

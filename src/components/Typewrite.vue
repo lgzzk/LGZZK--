@@ -6,7 +6,7 @@
 <script setup>
 import {TyperText} from '../assets/lgzzk_config.json';
 import {ref} from "vue";
-import {random} from "../utils/tool.js";
+import {random} from "../hook/index.js";
 
 const headText = ref(null)
 
@@ -18,6 +18,7 @@ let start = null,
 
 function typewriting(time) {
   window.requestAnimationFrame(typewriting);
+  if (!headText.value) return
   if (!start) start = time;
   let progress = time - start;
   if (progress > interval + random(0, interval) % interval) {
@@ -57,7 +58,7 @@ window.requestAnimationFrame(typewriting)
   font-weight: 900;
   text-align: center;
   user-select: none;
-  font-family: "Segoe UI",serif;
+  font-family: "Segoe UI", serif;
 }
 
 #headText::after {

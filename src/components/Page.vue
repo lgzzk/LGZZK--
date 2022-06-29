@@ -4,16 +4,21 @@
       :class="isOpenContent"
   >
     <MoreButton/>
-    <Swiper/>
-    <div class="content">
-      <transition
-          name="animate__animated animate__animated"
-          appear
-          enter-active-class="animate__zoomInDown"
-          leave-active-class="animate__backOutLeft animate__faster"
-      >
-        <RouterView></RouterView>
-      </transition>
+        <Swiper/>
+    <div
+        class="content"
+    >
+      <RouterView
+          v-motion
+          :initial="{
+            opacity: 0,
+            y: -1500,
+        }"
+          :enter="{
+            opacity: 1,
+            y: 0,
+        }"
+      ></RouterView>
     </div>
   </div>
 </template>
@@ -21,11 +26,11 @@
 <script setup>
 import Swiper from "./Swiper.vue";
 import MoreButton from "./MoreButton.vue";
-import {useStore} from "vuex";
 import {computed} from "vue";
+import {mainStore} from "../store/index.js";
 
-const {state} = useStore()
-const isOpenContent = computed(() => state.isOpenNavigation ? 'open-content' : 'close-content')
+const store = mainStore();
+const isOpenContent = computed(() => store.isOpenNavigation ? 'open-content' : 'close-content')
 </script>
 
 <style scoped>

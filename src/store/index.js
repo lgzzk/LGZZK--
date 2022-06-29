@@ -1,19 +1,14 @@
-import {createStore} from "vuex";
+import {defineStore} from "pinia";
 
-export let store = createStore({
-    state() {
-        return {
-            isOpenNavigation: false,
-            errorPath: '',
-            swiper: {}
-        }
-    },
-    mutations: {
-        setNavigation(state) {
-            state.isOpenNavigation = !state.isOpenNavigation
-        },
-        setSwiper(state, swiper){
-            state.swiper = swiper
+export const mainStore = defineStore("main", {
+    state: () => ({
+        isOpenNavigation: false,
+        errorPath: '',
+        swiper: null
+    }),
+    actions: {
+        setNavigation() {
+            this.isOpenNavigation = !this.isOpenNavigation
         }
     }
 })

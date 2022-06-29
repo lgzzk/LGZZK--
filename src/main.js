@@ -1,12 +1,14 @@
 import {createApp} from 'vue'
 import App from './App.vue'
-import {store} from "./store";
 import 'animate.css'
 import './assets/css/global.css'
 import {router} from "./router/index.js";
+import {MotionPlugin} from "@vueuse/motion";
+import {createPinia} from "pinia";
 
 
 createApp(App)
-    .use(store)
     .use(router)
+    .use(createPinia())
+    .use(MotionPlugin)
     .mount('#app')

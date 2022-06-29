@@ -5,12 +5,12 @@ import Version from "../pages/Version.vue";
 import About from "../pages/About.vue";
 import NotFound from "../components/NotFound.vue";
 import Home from "../pages/Home.vue";
-import {createRouter, createWebHashHistory} from "vue-router";
+import {createRouter, createWebHistory} from "vue-router";
 
 export const router = createRouter({
     base: '/',
     // mode: "history",
-    history: createWebHashHistory(),
+    history: createWebHistory(),
     routes: [
         {
             path: '/',

@@ -5,7 +5,6 @@
         :friend="f"
         :key="'friends'+i"
     />
-    <FriendInfo/>
   </div>
 </template>
 
